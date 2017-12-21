@@ -1,0 +1,15 @@
+Workbook
+ |- workbook.NumberOfSheets; // Sheet的总数
+ |- workbook.GetSheetAt(index); // 获取指定索引的Sheet
+Sheet
+ |- sheet.PhysicalNumberOfRows; // 有值的横行总数
+ |- sheet.FirstRowNum; // 第一个有值的横行
+ |- sheet.LastRowNum; // 最后一个有值的横行
+ |- sheet.GetRow(index); // 获取指定索引的Row
+Row
+ |- row.FirstCellNum; // 第一个有值的单元格
+ |- row.LastCellNum; // 最后一个有值的单元格
+ |- row.GetCell(index); // 获取指定索引的单元格
+Cell
+ |- cell.CellType; // 单元格的值类型，共7种
+ |- cell.NumericCellValue; // 当单元格的值是由公式所计算的，可以通过一些判断条件用该属性取值
