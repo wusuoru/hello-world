@@ -2,6 +2,7 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NpoiDemo.Core;
+using NpoiDemo.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,17 +27,27 @@ namespace NpoiDemo
 
             using (FileStream fs = File.OpenRead(path))
             {
+                string base64str = StringHelper.GetBase64String(fs);
+
+                byte[] data = Convert.FromBase64String(base64str);
+
                 string extension = Path.GetExtension(path);
 
-                var workbook = program.GetWorkbook(fs, extension);
-
-                // workbook.NumberOfSheets - Sheet的总数
-                for (int i = 0; i < workbook.NumberOfSheets; i++)
+                using (var memoryStream = new MemoryStream(data))
                 {
-                    ISheet sheet = workbook.GetSheetAt(i);
+                    var workbook = program.GetWorkbook(memoryStream, extension);
+                    
+                    // workbook.NumberOfSheets - Sheet的总数
+                    for (int i = 0; i < workbook.NumberOfSheets; i++)
+                    {
+                        ISheet sheet = workbook.GetSheetAt(i);
 
-                    program.OperateRows(sheet);
+                        program.OperateRows(sheet);
+                    }
+
+                    memoryStream.Close();
                 }
+
                 fs.Close();
             }
 
