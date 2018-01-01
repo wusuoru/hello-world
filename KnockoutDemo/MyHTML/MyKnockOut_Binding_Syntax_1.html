@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="../MyJS/knockout-3.4.2.debug.js"></script>
+    <script src="../MyJS/jquery-3.2.1.js"></script>
+    <script src="../MyJS/myjs_binding_syntax_1.js"></script>
+    <title></title>
+    <style type="text/css">
+        .section {
+            margin-top: 5px;
+            margin-bottom: 30px;
+            background-color: lightblue;
+        }
+
+        .css_bind_default_className {
+            font-weight: bold;
+        }
+
+        .css_bind_className {
+            background-color: lightslategray;
+        }
+    </style>
+</head>
+<body>
+    <!-- text 绑定 -->
+    <div id="text_bind" class="section">
+        <p>文本绑定： <span data-bind="text: text"></span></p>
+    </div>
+
+    <!-- visible 绑定 -->
+    <div id="visible_bind" class="section">
+        <span>visible 绑定：</span>
+        <button type="button" data-bind="click: setVisible">
+            <span data-bind="text: btnText"></span>
+        </button>
+        <span data-bind="visible: visible">内容</span>
+    </div>
+
+    <!-- html 绑定 -->
+    <div id="html_bind" class="section">
+        <p><span>HTML 绑定：</span><span data-bind="html: details">原内容</span></p>
+    </div>
+
+    <div id="css_bind" class="section">
+        <p>
+            <span>CSS 绑定：</span>
+            <button type="button" data-bind="click: addOrMoveClass"><span data-bind="text: btnText"></span></button>
+            <span class="css_bind_default_className" data-bind="css: currentClass">内容</span>
+        </p>
+    </div>
+</body>
+</html>
